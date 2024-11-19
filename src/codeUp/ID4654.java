@@ -22,6 +22,7 @@ KOI 통신연구소는 레이저를 이용한 새로운 비밀 통신 시스템 
 import java.util.Scanner;
 
 public class ID4654 {
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();

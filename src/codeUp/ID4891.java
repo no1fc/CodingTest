@@ -26,9 +26,24 @@ N명 학생들의 점수가 주어졌을 때, 가장 높은 점수와 가장 낮
 
  */
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class ID4891 {
+
+    //강사님 풀이
+    public void total() {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] score = new int[n];
+        for(int i = 0; i < n; i++){
+            score[i] = scanner.nextInt();
+        }
+        int max = Arrays.stream(score).max().getAsInt();
+        int min = Arrays.stream(score).min().getAsInt();
+        System.out.println(max - min);
+    }
+
     public static void main(String[] args) {
         //score 배열을 생성
         int[] score = {};
