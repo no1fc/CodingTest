@@ -20,9 +20,55 @@ KOI 통신연구소는 레이저를 이용한 새로운 비밀 통신 시스템 
  */
 
 import java.util.Scanner;
+import java.util.Stack;
 
 public class ID4654 {
 
+    //====================================================================================================
+    //강사님 풀이
+
+    //N 제곱에서 -> N
+    // 일반 for까지 시간복잡도를 줄일 수 있다.
+
+    //개발자 코딩은 이중for문 작성 ㄱㅊ
+
+    private static void test(){
+        int N=5;
+        int[] array = {6,9,5,7,4};
+        int[] result = arrayList(N,array);
+        for(int i : result){}
+    }
+
+    private static int[] arrayList(int n, int[] tower) {
+        int[] result = new int[n];
+        Stack<int[]> stack = new Stack<int[]>();
+        // {탑의 높이, 탑의 위치} 를 저장 하기 위해 == DTO, 배열을 저장한다.
+
+        for(int i = 0; i < n; i++){// 시간복잡도 O(n) == 이미 반복문 1개는 반드시 사용해야한다.
+            // 1) 현재비교대상이 되는 탑보다 높은 탑이 스택에 있나? <- (나보다 높은 탑이 있나?)
+            while(!stack.isEmpty() && stack.peek()[0] < tower[i]){
+                //스택에 저장된 데이터가 있을때
+                //저장된 높이가 현재 나보다 작으면
+                //스택에서 제거
+                stack.pop();
+            }
+            // 2) 신호를 받을 탑이 없다면 0을 저장 <- (result로 0 저장)
+            //      탑이 있으면 위치정보 저장
+            if(stack.isEmpty()){
+                result[i] = 0;
+            }
+            else{
+                result[i] = stack.peek()[1] + 1;
+            }
+            // 3) 현재비교대상이었던 탑은 다음 비교대상이됨
+            //      ==> 스택에 저장해야함
+            stack.push(new int[]{tower[i], i});
+        }
+
+        return result;
+    }
+
+    //====================================================================================================
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int n = scanner.nextInt();

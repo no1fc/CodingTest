@@ -33,7 +33,8 @@ import java.util.Stack;
 */
 public class ID4833 {
     public static void main(String[] args) {
-        stackArray("()(((()())(())()))(())");
+//        stackArray("()(((()())(())()))(())");
+        stackArray2();
     }
 
     private static void stackArray(String laser){
