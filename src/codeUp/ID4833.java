@@ -32,13 +32,53 @@ import java.util.Stack;
 쇠막대기와 레이저의 배치를 나타내는 괄호 표현 이 주어졌을 때, 잘려진 쇠막대기 조각의 총 개수 를 구하는 프로그램을 작성하시오.
 */
 public class ID4833 {
+    //================================================================
+    //강사님 풀이
+    private static int test(String input){
+        int result = 0;
+        //Stack은 컬렉션 프레임워크이기 때문에 제네릭이 필수로 필요하다.
+        //char 형식을 넣어야하지만 원시타입이기 때문에.
+        //Character 로 제네릭에 등록해야한다.
+        Stack<Character> stack = new Stack<Character>();
+        //쇠 막대기 문제를 풀때 ) 괄호로 레이저 구분이 가능하다.
+        //연산자가 함수보다 연산속도가 빠르기 때문에
+        // 연산자를 사용하는 것이 좋다.
+
+        for(int i = 0; i < input.length(); i++){
+            char c = input.charAt(i);
+
+            if(c=='('){
+                //레이저인지, 막대기인지 현재는 파악이 불가능하다.
+                //스택에 저장해서 확인해준다.
+                stack.push(c);
+            }
+            else{
+                stack.pop();// 레이저 짝꿍 ( 를 먼저 제거
+                if(input.charAt(i-1) == '('){
+                    //()레이저
+                    // 현재 스택에 저장된 막대기 수 만큼 조각이 나온다.
+                    result += stack.size();
+                }
+                else{
+                    //))막대기
+                    //조각 1개만 추가하면된다.
+                    result++;
+                }
+            }
+        }
+
+        return result;
+    }
+    //================================================================
     public static void main(String[] args) {
 //        stackArray("()(((()())(())()))(())");
-        stackArray2();
+//        stackArray2();
+        String input = "()(((()())(())()))(())";
+        int result = test(input);
+        System.out.println(result);
     }
 
     private static void stackArray(String laser){
-        Scanner sc = new Scanner(System.in);
         int count = 0;
         Stack<String> st = new Stack<String>();
 
